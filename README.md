@@ -6,13 +6,19 @@ This is a proof-of-concept implementation of the general description of Runge–
 
 Check out the **[Notebook Demo](http://nbviewer.ipython.org/2e2e4bf69d02872ba2f0)** for the explanations of the following pictures.
 
+Integration on a Stiefel manifold:
 
-![Oja](https://raw.githubusercontent.com/olivierverdier/homogint/master/img/oja.png)
+<img alt="oja" src="https://raw.githubusercontent.com/olivierverdier/homogint/master/img/oja.png" width="200px"/>
 
-![quad](https://raw.githubusercontent.com/olivierverdier/homogint/master/img/quad.png)
+Quadrature on a sphere:
 
-![so3quad](https://raw.githubusercontent.com/olivierverdier/homogint/master/img/so3quad.png)
+<img alt="quad" src="https://raw.githubusercontent.com/olivierverdier/homogint/master/img/quad.png" width="200px"/>
 
+Quadrature on the group SO(3):
+
+<img alt="so3quda" src="https://raw.githubusercontent.com/olivierverdier/homogint/master/img/so3quad.png" width="200px"/>
+
+Continuous QR flow, converging towards a diagonal matrix:
 
 ![matinit](https://raw.githubusercontent.com/olivierverdier/homogint/master/img/matinit.png) ![matfinal](https://raw.githubusercontent.com/olivierverdier/homogint/master/img/matfinal.png)
 
