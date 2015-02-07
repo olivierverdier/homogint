@@ -1,8 +1,6 @@
 language: python
 python:
   - 2.7
-notifications:
-  email: false
 
 # Setup anaconda
 before_install:
@@ -10,16 +8,22 @@ before_install:
   - chmod +x miniconda.sh
   - ./miniconda.sh -b
   - export PATH=/home/travis/miniconda/bin:$PATH
+  - conda config --add channels https://conda.binstar.org/dan_blanchard
   - conda update --yes conda
+# Install packages
+install:
+  - conda install --yes python=$TRAVIS_PYTHON_VERSION pip numpy scipy matplotlib nose python-coveralls
+  - pip install nose-cov
   # The next couple lines fix a crash with multiprocessing on Travis and are not specific to using Miniconda
   - sudo rm -rf /dev/shm
   - sudo ln -s /run/shm /dev/shm
-# Install packages
-install:
-  - conda install --yes python=$TRAVIS_PYTHON_VERSION pip numpy scipy matplotlib nose
   - /home/travis/miniconda/bin/pip install .
   - /home/travis/miniconda/bin/pip install -r requirements.txt
 
 # Run test
 script:
-  - nosetests
+  - nosetests --with-cov --cov=homogint --cov-config=.coveragerc --logging-level=DEBUG
+
+# Calculate coverage
+after_success:
+  - coveralls --config_file .coveragerc
