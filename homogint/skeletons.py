@@ -26,7 +26,7 @@ class BackwardEuler(ExponentialSkeleton):
 
 class MidPoint(ExponentialSkeleton):
     edges = [(1,0, lambda vecs:vecs[1]/2),
-            (2,0, lambda vecs: vecs[1])]
+            (2,1, lambda vecs: vecs[1]/2)]
 
 class Trapezoidal(ExponentialSkeleton):
     edges = [(1,0, lambda vecs:(vecs[0]+vecs[1])/2.)]
