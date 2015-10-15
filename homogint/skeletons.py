@@ -88,6 +88,7 @@ class RKMK3(ExponentialSkeleton):
     def t30(self, F):
         l = (F[0] + 4*F[1] + F[2])/6
         return l + commutator(l,F[0])/6
+        # equivalent to (F[0] + 4*F[1] + F[2])/6 + commutator(4*F[1]+F[2],F[0])/36
     
     @property
     def edges(self):
