@@ -1,6 +1,7 @@
 # Integrators on homogeneous spaces
 
-[![Build Status](https://img.shields.io/travis/olivierverdier/homogint/master.svg)](https://travis-ci.org/olivierverdier/homogint) [![Coverage Status](https://img.shields.io/coveralls/olivierverdier/homogint/master.svg)](https://coveralls.io/r/olivierverdier/homogint?branch=master)
+[![Build Status](https://img.shields.io/travis/olivierverdier/homogint/master.svg?style=flat-square)](https://travis-ci.org/olivierverdier/homogint)
+[![Coverage Status](https://img.shields.io/coveralls/olivierverdier/homogint/master.svg?style=flat-square)](https://coveralls.io/r/olivierverdier/homogint?branch=master)
 
 This is a proof-of-concept implementation of the general description of Runge–Kutta on homogeneous spaces, from the paper ["Integrators on homogeneous spaces: Isotropy choice and connections"](http://arxiv.org/abs/1402.6981).
 
