@@ -63,7 +63,7 @@ class TestSphere(unittest.TestCase):
         eigenvalues = [np.sort(nl.eigvals(P)) for P in Ps]
         aeigenvalues = np.array(eigenvalues)
         deig = aeigenvalues - aeigenvalues[0]
-        npt.assert_allclose(deig, 0, atol=1e-13, err_msg="numerical flow is isospectral")
+        npt.assert_allclose(deig, 0, atol=1e-12, err_msg="numerical flow is isospectral")
 
     def test_no_convergence(self):
         """
