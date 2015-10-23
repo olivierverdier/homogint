@@ -12,12 +12,12 @@ before_install:
   - ./miniconda.sh -b
   - export PATH=/home/travis/miniconda/bin:$PATH
   - conda update --yes conda
+
 # Install packages
 install:
   - conda install --yes python=$TRAVIS_PYTHON_VERSION pip numpy scipy matplotlib nose
   - pip install -e "git+https://github.com/z4r/python-coveralls.git#egg=pycoveralls"
   - pip install nose-cov
-  # The next couple lines fix a crash with multiprocessing on Travis and are not specific to using Miniconda
   - pip install .
   - pip install -r requirements.txt
 
