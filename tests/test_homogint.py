@@ -20,6 +20,16 @@ def rotation_field(x):
     J[1,0] = 1.
     return .1*J
 
+inertia = np.array([1.,2.,3.])
+def body_field(x):
+    ix = inertia*x
+    xi = np.zeros([3,3])
+    xi[0,1] = ix[2]
+    xi[0,2] = -ix[1]
+    xi[1,2] = ix[0]
+    xi -= xi.T
+    return xi
+
 def iso_field(P):
     sk = np.tril(P) - np.triu(P) # skew symmetric
     return sk
@@ -41,15 +51,6 @@ class TestSphere(unittest.TestCase):
         npt.assert_allclose(x[-1], x0[-1], err_msg="rotation around NS axis")
         npt.assert_allclose(np.sum(np.square(x)), np.sum(np.square(x0)), err_msg="stay on the sphere")
 
-inertia = np.array([1.,2.,3.])
-def body_field(x):
-    ix = inertia*x
-    xi = np.zeros([3,3])
-    xi[0,1] = ix[2]
-    xi[0,2] = -ix[1]
-    xi[1,2] = ix[0]
-    xi -= xi.T
-    return xi
     def test_Toda(self):
         """
         Numerical flow is isospectral.
@@ -58,16 +59,25 @@ def body_field(x):
         init = rmat + rmat.T
         Ps = [init]
         dt = .25
-        solve(time_step(dt)(iso_field), Ps, lambda i,x: i>30/dt, action=trans_adjoint)
+        solve(time_step(dt)(iso_field), Ps, lambda i,x: i>10/dt, action=trans_adjoint)
         eigenvalues = [np.sort(nl.eigvals(P)) for P in Ps]
         aeigenvalues = np.array(eigenvalues)
         deig = aeigenvalues - aeigenvalues[0]
-        npt.assert_allclose(deig, 0, atol=1e-12, err_msg="numerical flow is isospectral")
+        npt.assert_allclose(deig, 0, atol=1e-13, err_msg="numerical flow is isospectral")
+
+    def test_no_convergence(self):
+        """
+        Convergence failure is caught with an exception.
+        """
+        rk = RungeKutta(BackwardEuler())
+        x0 = np.array([1.,1.,1])/np.sqrt(3)
+        with self.assertRaises(Exception):
+            rk.step(time_step(10.)(body_field), x0, action=trans_adjoint)
 
 
 class HarnessOrder(object):
     scaling = 1
-    def test(self):
+    def test_order(self):
         rk = RungeKutta(self.method)
         ks = [0,1,7]
         x0 = np.array([1.,1.,1])/np.sqrt(3)
