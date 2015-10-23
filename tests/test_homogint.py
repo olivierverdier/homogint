@@ -2,10 +2,14 @@
 # coding: UTF-8
 from __future__ import division
 
+
 import unittest
 import numpy.testing as npt
 
 from homogint import *
+from homogint.homogint import trans_adjoint
+
+import numpy.linalg as nl
 
 def rotation_field(x):
     """
@@ -16,6 +20,16 @@ def rotation_field(x):
     J[1,0] = 1.
     return .1*J
 
+def iso_field(P):
+    sk = np.tril(P) - np.triu(P) # skew symmetric
+    return sk
+
+def solve(vf,xs,stopping,action=None, maxit=10000,solver=RungeKutta(RKMK4())):
+    "Simple solver with stopping condition. The list xs is modified **in place**."
+    for i in range(maxit):
+        if stopping(i,xs[-1]):
+            break
+        xs.append(solver.step(vf, xs[-1], action=action))
 
 class TestSphere(unittest.TestCase):
     def test_main(self):
@@ -36,6 +50,20 @@ def body_field(x):
     xi[1,2] = ix[0]
     xi -= xi.T
     return xi
+    def test_Toda(self):
+        """
+        Numerical flow is isospectral.
+        """
+        rmat = np.random.randn(20,20)
+        init = rmat + rmat.T
+        Ps = [init]
+        dt = .25
+        solve(time_step(dt)(iso_field), Ps, lambda i,x: i>30/dt, action=trans_adjoint)
+        eigenvalues = [np.sort(nl.eigvals(P)) for P in Ps]
+        aeigenvalues = np.array(eigenvalues)
+        deig = aeigenvalues - aeigenvalues[0]
+        npt.assert_allclose(deig, 0, atol=1e-12, err_msg="numerical flow is isospectral")
+
 
 class HarnessOrder(object):
     scaling = 1
