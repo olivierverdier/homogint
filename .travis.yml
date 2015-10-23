@@ -3,6 +3,8 @@ python:
   - 2.7
   - 3.4
 
+sudo: false
+
 # Setup anaconda
 before_install:
   - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
@@ -16,10 +18,8 @@ install:
   - pip install -e "git+https://github.com/z4r/python-coveralls.git#egg=pycoveralls"
   - pip install nose-cov
   # The next couple lines fix a crash with multiprocessing on Travis and are not specific to using Miniconda
-  - sudo rm -rf /dev/shm
-  - sudo ln -s /run/shm /dev/shm
-  - /home/travis/miniconda/bin/pip install .
-  - /home/travis/miniconda/bin/pip install -r requirements.txt
+  - pip install .
+  - pip install -r requirements.txt
 
 # Run test
 script:
