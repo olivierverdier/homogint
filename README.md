@@ -11,18 +11,18 @@ Click on the following pictures to get an explanation [in the corresponding Note
 
 Integration on a Stiefel manifold:
 
-<a href="http://nbviewer.ipython.org/github/olivierverdier/homogint/blob/master/Demo.ipynb#Stiefel-manifold:-Oja-Flow"><img alt="oja" src="https://raw.githubusercontent.com/olivierverdier/homogint/master/img/oja.png" width="200px"/></a>
+<a href="http://nbviewer.org/github/olivierverdier/homogint/blob/main/Demo.ipynb#Stiefel-manifold:-Oja-Flow"><img alt="oja" src="https://raw.githubusercontent.com/olivierverdier/homogint/main/img/oja.png" width="200px"/></a>
 
 Quadrature on a sphere:
 
-<a href="http://nbviewer.ipython.org/github/olivierverdier/homogint/blob/master/Demo.ipynb#Sphere:-quadrature"><img alt="quad" src="https://raw.githubusercontent.com/olivierverdier/homogint/master/img/quad.png" width="200px"/></a>
+<a href="http://nbviewer.org/github/olivierverdier/homogint/blob/main/Demo.ipynb#Sphere:-quadrature"><img alt="quad" src="https://raw.githubusercontent.com/olivierverdier/homogint/main/img/quad.png" width="200px"/></a>
 
 Quadrature on the group SO(3):
 
-<a href="http://nbviewer.ipython.org/github/olivierverdier/homogint/blob/master/Demo.ipynb#$\mathsf{SO}%283%29$:-Quadrature"><img alt="so3quda" src="https://raw.githubusercontent.com/olivierverdier/homogint/master/img/so3quad.png" width="200px"/></a>
+<a href="http://nbviewer.org/github/olivierverdier/homogint/blob/main/Demo.ipynb#$\mathsf{SO}%283%29$:-Quadrature"><img alt="so3quda" src="https://raw.githubusercontent.com/olivierverdier/homogint/main/img/so3quad.png" width="200px"/></a>
 
 Continuous QR flow, converging towards a diagonal matrix:
 
-[![matinit](https://raw.githubusercontent.com/olivierverdier/homogint/master/img/matinit.png) ![matfinal](https://raw.githubusercontent.com/olivierverdier/homogint/master/img/matfinal.png)](http://nbviewer.ipython.org/github/olivierverdier/homogint/blob/master/Demo.ipynb#Isospectral-Manifold:-Toda-flow)
+[![matinit](https://raw.githubusercontent.com/olivierverdier/homogint/main/img/matinit.png) ![matfinal](https://raw.githubusercontent.com/olivierverdier/homogint/main/img/matfinal.png)](http://nbviewer.org/github/olivierverdier/homogint/blob/main/Demo.ipynb#Isospectral-Manifold:-Toda-flow)
 
 
