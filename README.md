@@ -5,7 +5,7 @@
 
 This is a proof-of-concept implementation of the general description of Runge–Kutta on homogeneous spaces, from the paper ["Integrators on homogeneous spaces: Isotropy choice and connections"](http://arxiv.org/abs/1402.6981).
 
-Click on the following pictures to get an explanation [in the corresponding Notebook](http://nbviewer.ipython.org/github/olivierverdier/homogint/blob/master/Demo.ipynb).
+Click on the following pictures to get an explanation [in the corresponding Notebook](https://nbviewer.org/github/olivierverdier/homogint/blob/main/Demo.ipynb).
 
 Integration on a Stiefel manifold:
 
