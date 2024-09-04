@@ -2,11 +2,13 @@
 # coding: UTF-8
 from __future__ import division
 
-
 import unittest
 import numpy.testing as npt
 
-from homogint import *
+import numpy as np
+
+from homogint import RungeKutta, time_step
+import homogint.skeletons as sk
 from homogint.homogint import trans_adjoint
 
 import numpy.linalg as nl
@@ -34,7 +36,7 @@ def iso_field(P):
     sk = np.tril(P) - np.triu(P) # skew symmetric
     return sk
 
-def solve(vf,xs,stopping,action=None, maxit=10000,solver=RungeKutta(RKMK4())):
+def solve(vf,xs,stopping,action=None, maxit=10000,solver=RungeKutta(sk.RKMK4())):
     "Simple solver with stopping condition. The list xs is modified **in place**."
     for i in range(maxit):
         if stopping(i,xs[-1]):
@@ -43,7 +45,7 @@ def solve(vf,xs,stopping,action=None, maxit=10000,solver=RungeKutta(RKMK4())):
 
 class TestSphere(unittest.TestCase):
     def test_main(self):
-        rk = RungeKutta(RKMK4())
+        rk = RungeKutta(sk.RKMK4())
         x0 = np.random.rand(3).reshape(-1,1)
         x = x0.copy()
         for i in range(10):
@@ -69,7 +71,7 @@ class TestSphere(unittest.TestCase):
         """
         Convergence failure is caught with an exception.
         """
-        rk = RungeKutta(BackwardEuler())
+        rk = RungeKutta(sk.BackwardEuler())
         x0 = np.array([1.,1.,1])/np.sqrt(3)
         with self.assertRaises(Exception):
             rk.step(time_step(10.)(body_field), x0, action=trans_adjoint)
@@ -94,39 +96,39 @@ class HarnessOrder(object):
         self.assertGreater(computed_order, self.order)
 
 class TestRKMK4(HarnessOrder, unittest.TestCase):
-    method = RKMK4()
+    method = sk.RKMK4()
     order = 4
 
 class TestCG3(HarnessOrder, unittest.TestCase):
-    method = CrouchGrossman3()
+    method = sk.CrouchGrossman3()
     order = 3
     scaling = .1
 
 class TestCF4(HarnessOrder, unittest.TestCase):
-    method = CommutatorFree4()
+    method = sk.CommutatorFree4()
     order = 4
 
 class TestRKMK3(HarnessOrder, unittest.TestCase):
-    method = RKMK3()
+    method = sk.RKMK3()
     order = 3
     scaling=.5
 
 class TestForwardEuler(HarnessOrder, unittest.TestCase):
-    method = ForwardEuler()
+    method = sk.ForwardEuler()
     order = 1
     scaling = .01
 
 class TestBackwardEuler(HarnessOrder, unittest.TestCase):
-    method = BackwardEuler()
+    method = sk.BackwardEuler()
     order = 1
     scaling = .01
 
 class TestMidPoint(HarnessOrder, unittest.TestCase):
-    method = MidPoint()
+    method = sk.MidPoint()
     order = 2
     scaling = .01
 
 class TestTrapezoidal(HarnessOrder, unittest.TestCase):
-    method = Trapezoidal()
+    method = sk.Trapezoidal()
     order = 2
     scaling = .1
