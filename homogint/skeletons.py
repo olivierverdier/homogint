@@ -86,8 +86,8 @@ class RKMK3(ExponentialSkeleton):
     def t20(self, F):
         return -F[0] + 2*F[1]
     def t30(self, F):
-        l = (F[0] + 4*F[1] + F[2])/6
-        return l + commutator(l,F[0])/6
+        tmp = (F[0] + 4*F[1] + F[2])/6
+        return tmp + commutator(tmp,F[0])/6
         # equivalent to (F[0] + 4*F[1] + F[2])/6 + commutator(4*F[1]+F[2],F[0])/36
     
     @property
