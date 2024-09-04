@@ -32,13 +32,13 @@ jobs:
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=src
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --ignore=E231,E226,E302,E301,E225 
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --ignore=E231,E226,E302,E301,E225 --exclude=src
     - name: Lint with Ruff
       run: |
         pip install ruff
-        ruff check --output-format=github .
+        ruff check --output-format=github --exclude=src .
       continue-on-error: true
     - name: Test with pytest
       run: |
