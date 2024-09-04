@@ -17,6 +17,11 @@ class Skeleton(ABC):
     def movement(self, xi):
         pass
 
+    @property
+    @abstractmethod
+    def edges(self):
+        pass
+
 class ExponentialSkeleton(Skeleton):
     def movement(self, xi):
         return exponential(xi)
