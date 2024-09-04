@@ -10,7 +10,14 @@ def exponential(xi):
 def commutator(x1,x2):
     return np.dot(x1,x2) - np.dot(x2,x1)
 
-class ExponentialSkeleton(object):
+from abc import ABC, abstractmethod 
+
+class Skeleton(ABC):
+    @abstractmethod
+    def movement(self, xi):
+        pass
+
+class ExponentialSkeleton(Skeleton):
     def movement(self, xi):
         return exponential(xi)
 
