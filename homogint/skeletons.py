@@ -26,7 +26,7 @@ class BackwardEuler(ExponentialSkeleton):
 
 class MidPoint(ExponentialSkeleton):
     edges = [(1,0, lambda vecs:vecs[1]/2),
-            (2,1, lambda vecs: vecs[1]/2)]
+             (2,1, lambda vecs: vecs[1]/2)]
 
 class Trapezoidal(ExponentialSkeleton):
     edges = [(1,0, lambda vecs:(vecs[0]+vecs[1])/2.)]
@@ -51,7 +51,7 @@ class CommutatorFree4(ExponentialSkeleton):
             (3,1, self.t31),
             (4,0, self.t40),
             (5,4, self.t54),
-            ]
+        ]
 
 
 class RKMK4(ExponentialSkeleton):
@@ -75,7 +75,7 @@ class RKMK4(ExponentialSkeleton):
             (2,0, self.t20),
             (3,0, self.t30),
             (4,0, self.t40),
-            ]
+        ]
 
 class RKMK3(ExponentialSkeleton):
     """
@@ -88,15 +88,14 @@ class RKMK3(ExponentialSkeleton):
     def t30(self, F):
         tmp = (F[0] + 4*F[1] + F[2])/6
         return tmp + commutator(tmp,F[0])/6
-        # equivalent to (F[0] + 4*F[1] + F[2])/6 + commutator(4*F[1]+F[2],F[0])/36
-    
+    # equivalent to (F[0] + 4*F[1] + F[2])/6 + commutator(4*F[1]+F[2],F[0])/36
     @property
     def edges(self):
         return [
-                (1,0, self.t10),
-                (2,0, self.t20),
-                (3,0, self.t30),
-                ]
+            (1,0, self.t10),
+            (2,0, self.t20),
+            (3,0, self.t30),
+        ]
 
 class CrouchGrossman3(ExponentialSkeleton):
     """
@@ -118,10 +117,10 @@ class CrouchGrossman3(ExponentialSkeleton):
     @property
     def edges(self):
         return [
-                (1,0, self.t10),
-                (2,0, self.t20),
-                (3,2, self.t32),
-                (4,0, self.t40),
-                (5,4, self.t54),
-                (6,5, self.t65),
-                ]
+            (1,0, self.t10),
+            (2,0, self.t20),
+            (3,2, self.t32),
+            (4,0, self.t40),
+            (5,4, self.t54),
+            (6,5, self.t65),
+        ]

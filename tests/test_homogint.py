@@ -22,7 +22,9 @@ def rotation_field(x):
     J[1,0] = 1.
     return .1*J
 
+
 inertia = np.array([1.,2.,3.])
+
 def body_field(x):
     ix = inertia*x
     xi = np.zeros([3,3])
@@ -33,7 +35,7 @@ def body_field(x):
     return xi
 
 def iso_field(P):
-    sk = np.tril(P) - np.triu(P) # skew symmetric
+    sk = np.tril(P) - np.triu(P)  # skew symmetric
     return sk
 
 def solve(vf,xs,stopping,action=None, maxit=10000,solver=RungeKutta(sk.RKMK4())):

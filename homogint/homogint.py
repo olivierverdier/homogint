@@ -56,7 +56,6 @@ class RungeKutta(object):
         if action is None:
             action = left_multiplication
         iterate = self.get_iterate(movement_field, action)
-        z0 = np.array([x0]*self.nb_stages) # initial guess
+        z0 = np.array([x0]*self.nb_stages)  # initial guess
         z, i = self.fix(iterate, z0)
         return z[-1]
-
