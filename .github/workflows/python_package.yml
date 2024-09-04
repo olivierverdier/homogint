@@ -42,7 +42,7 @@ jobs:
       continue-on-error: true
     - name: Test with pytest
       run: |
-        pytest
+        pytest tests
     - name: Generate Coverage Report
       run: |
         pip install coverage
