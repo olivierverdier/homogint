@@ -1,46 +1,31 @@
 import numpy as np
 from typing import Callable
 
-from padexp import Exponential # type: ignore
-
-Exp = Exponential(order=16)
-
-def exponential(xi):
-    return Exp(xi)[0]
-
 def commutator(x1,x2):
     return np.dot(x1,x2) - np.dot(x2,x1)
 
 from abc import ABC, abstractmethod 
 
 class Skeleton(ABC):
-    @abstractmethod
-    def movement(self, xi):
-        pass
-
     @property
     @abstractmethod
     def edges(self) -> list[tuple[int, int, Callable[[np.ndarray], np.ndarray]]]:
         pass
 
-class ExponentialSkeleton(Skeleton):
-    def movement(self, xi):
-        return exponential(xi)
-
-class ForwardEuler(ExponentialSkeleton):
+class ForwardEuler(Skeleton):
     edges = [(1,0, lambda vecs:vecs[0])]
 
-class BackwardEuler(ExponentialSkeleton):
+class BackwardEuler(Skeleton):
     edges = [(1,0, lambda vecs:vecs[1])]
 
-class MidPoint(ExponentialSkeleton):
+class MidPoint(Skeleton):
     edges = [(1,0, lambda vecs:vecs[1]/2),
              (2,1, lambda vecs: vecs[1]/2)]
 
-class Trapezoidal(ExponentialSkeleton):
+class Trapezoidal(Skeleton):
     edges = [(1,0, lambda vecs:(vecs[0]+vecs[1])/2.)]
 
-class CommutatorFree4(ExponentialSkeleton):
+class CommutatorFree4(Skeleton):
     def t10(self, F):
         return F[0]/2
     def t20(self, F):
@@ -63,7 +48,7 @@ class CommutatorFree4(ExponentialSkeleton):
         ]
 
 
-class RKMK4(ExponentialSkeleton):
+class RKMK4(Skeleton):
     """
     Taken from http://www.math.ntnu.no/num/expint/talks/owren04innsbruck.pdf
     or http://arxiv.org/pdf/1207.0069.pdf
@@ -86,7 +71,7 @@ class RKMK4(ExponentialSkeleton):
             (4,0, self.t40),
         ]
 
-class RKMK3(ExponentialSkeleton):
+class RKMK3(Skeleton):
     """
     From McLachlan, Quispel, Integrating ODEs
     """
@@ -106,7 +91,7 @@ class RKMK3(ExponentialSkeleton):
             (3,0, self.t30),
         ]
 
-class CrouchGrossman3(ExponentialSkeleton):
+class CrouchGrossman3(Skeleton):
     """
     From Hairer, Lubich, Wanner 2006.
     """

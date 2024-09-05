@@ -5,7 +5,7 @@ import numpy as np
 
 from homogint import RungeKutta, time_step
 import homogint.skeletons as sk
-from homogint.homogint import trans_adjoint
+from homogint.actions import trans_adjoint
 
 import numpy.linalg as nl
 

@@ -4,20 +4,16 @@ from numpy.typing import NDArray
 
 from .skeletons import Skeleton
 
-def left_multiplication(g: np.ndarray, x: np.ndarray) -> np.ndarray:
-    """
-    Multiplication action of a group and a vector.
-    """
-    return np.dot(g, x)
-
-def trans_adjoint(g: np.ndarray, x: np.ndarray) -> np.ndarray:
-    return np.dot(np.dot(g,x),g.T)
+from .actions import left_multiplication
+from .movement import exponential
 
 class RungeKutta:
 
-    def __init__(self, method: Skeleton):
+    def __init__(self, method: Skeleton, movement: Callable | None=None):
         self.method = method
-        self.movement = self.method.movement
+        if movement is None:
+            movement = exponential
+        self.movement = movement
         self.nb_stages = len(self.method.edges) + 1
 
     def compute_vectors(self, movement_field: Callable, stages: list) -> np.ndarray:
