@@ -1,29 +1,32 @@
 import numpy as np
+from typing import Callable
+from numpy.typing import NDArray
 
+from .skeletons import Skeleton
 
-def left_multiplication(g, x):
+def left_multiplication(g: np.ndarray, x: np.ndarray) -> np.ndarray:
     """
     Multiplication action of a group and a vector.
     """
     return np.dot(g, x)
 
-def trans_adjoint(g, x):
+def trans_adjoint(g: np.ndarray, x: np.ndarray) -> np.ndarray:
     return np.dot(np.dot(g,x),g.T)
 
-class RungeKutta(object):
+class RungeKutta:
 
-    def __init__(self, method):
+    def __init__(self, method: Skeleton):
         self.method = method
         self.movement = self.method.movement
         self.nb_stages = len(self.method.edges) + 1
 
-    def compute_vectors(self, movement_field, stages):
+    def compute_vectors(self, movement_field: Callable, stages: list) -> np.ndarray:
         """
         Compute the Lie algebra elements for the stages.
         """
         return np.array([movement_field(stage) for stage in stages])
 
-    def get_iterate(self, movement_field, action):
+    def get_iterate(self, movement_field: Callable, action: Callable) -> Callable:
         def evol(stages):
             new_stages = stages.copy()
             for (i,j, transition) in self.method.edges:
@@ -35,7 +38,7 @@ class RungeKutta(object):
         return evol
 
     @classmethod
-    def fix(self, iterate, z):
+    def fix(self, iterate: Callable[[np.ndarray], np.ndarray], z: NDArray) -> tuple[NDArray, int]:
         """
         Find a fixed point to the iterating function `iterate`.
         """
@@ -48,7 +51,7 @@ class RungeKutta(object):
             raise Exception("No convergence after {} steps".format(i))
         return z, i
 
-    def step(self, movement_field, x0, action=None):
+    def step(self, movement_field: Callable, x0: np.ndarray, action: Callable | None=None) -> np.ndarray:
         if action is None:
             action = left_multiplication
         iterate = self.get_iterate(movement_field, action)

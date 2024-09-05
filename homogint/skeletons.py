@@ -1,6 +1,7 @@
 import numpy as np
+from typing import Callable
 
-from padexp import Exponential
+from padexp import Exponential # type: ignore
 
 Exp = Exponential(order=16)
 
@@ -19,7 +20,7 @@ class Skeleton(ABC):
 
     @property
     @abstractmethod
-    def edges(self):
+    def edges(self) -> list[tuple[int, int, Callable[[np.ndarray], np.ndarray]]]:
         pass
 
 class ExponentialSkeleton(Skeleton):
