@@ -1,2 +1,3 @@
 ignore:
   - "homogint/movements.py"
+  - "examples/plot_sphere.py"
