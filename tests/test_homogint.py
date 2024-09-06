@@ -10,6 +10,8 @@ from homogint.geodesics import Geodesic
 
 import numpy.linalg as nl
 
+rng = np.random.default_rng(10)
+
 def rotation_field(x):
     """
     Circular motion around NS axis.
@@ -47,7 +49,7 @@ def solve(vf,xs,stopping,action=None, maxit=10000,solver=None):
 class TestSphere(unittest.TestCase):
     def test_main(self):
         rk = Integrator(sk.RKMK4())
-        x0 = np.random.rand(3).reshape(-1,1)
+        x0 = rng.standard_normal(3).reshape(-1,1)
         x = x0.copy()
         for i in range(10):
             x = rk.step(rotation_field, x)
@@ -58,7 +60,7 @@ class TestSphere(unittest.TestCase):
         """
         Numerical flow is isospectral.
         """
-        rmat = np.random.randn(size, size)
+        rmat = rng.standard_normal((size, size))
         init = rmat + rmat.T
         Ps = [init]
         dt = .25
