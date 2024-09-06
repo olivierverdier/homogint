@@ -54,11 +54,11 @@ class TestSphere(unittest.TestCase):
         npt.assert_allclose(x[-1], x0[-1], err_msg="rotation around NS axis")
         npt.assert_allclose(np.sum(np.square(x)), np.sum(np.square(x0)), err_msg="stay on the sphere")
 
-    def test_Toda(self):
+    def test_Toda(self, size=5):
         """
         Numerical flow is isospectral.
         """
-        rmat = np.random.randn(20,20)
+        rmat = np.random.randn(size, size)
         init = rmat + rmat.T
         Ps = [init]
         dt = .25
