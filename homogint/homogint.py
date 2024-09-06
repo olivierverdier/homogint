@@ -7,7 +7,7 @@ from .skeletons import Skeleton
 from .actions import left_multiplication
 from .movement import exponential
 
-class RungeKutta:
+class Integrator:
 
     def __init__(self, method: Skeleton, movement: Callable | None=None):
         self.method = method
@@ -54,3 +54,5 @@ class RungeKutta:
         z0 = np.array([x0]*self.nb_stages)  # initial guess
         z, i = self.fix(iterate, z0)
         return z[-1]
+
+RungeKutta = Integrator

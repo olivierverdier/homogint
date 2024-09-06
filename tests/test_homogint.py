@@ -3,7 +3,7 @@ import numpy.testing as npt
 
 import numpy as np
 
-from homogint import RungeKutta, time_step
+from homogint import Integrator, time_step
 import homogint.skeletons as sk
 from homogint.actions import trans_adjoint
 
@@ -34,7 +34,7 @@ def iso_field(P):
     sk = np.tril(P) - np.triu(P)  # skew symmetric
     return sk
 
-def solve(vf,xs,stopping,action=None, maxit=10000,solver=RungeKutta(sk.RKMK4())):
+def solve(vf,xs,stopping,action=None, maxit=10000,solver=Integrator(sk.RKMK4())):
     "Simple solver with stopping condition. The list xs is modified **in place**."
     for i in range(maxit):
         if stopping(i,xs[-1]):
@@ -43,7 +43,7 @@ def solve(vf,xs,stopping,action=None, maxit=10000,solver=RungeKutta(sk.RKMK4()))
 
 class TestSphere(unittest.TestCase):
     def test_main(self):
-        rk = RungeKutta(sk.RKMK4())
+        rk = Integrator(sk.RKMK4())
         x0 = np.random.rand(3).reshape(-1,1)
         x = x0.copy()
         for i in range(10):
@@ -69,7 +69,7 @@ class TestSphere(unittest.TestCase):
         """
         Convergence failure is caught with an exception.
         """
-        rk = RungeKutta(sk.BackwardEuler())
+        rk = Integrator(sk.BackwardEuler())
         x0 = np.array([1.,1.,1])/np.sqrt(3)
         with self.assertRaises(Exception):
             rk.step(time_step(10.)(body_field), x0, action=trans_adjoint)
@@ -78,7 +78,7 @@ class TestSphere(unittest.TestCase):
 class HarnessOrder(object):
     scaling = 1
     def test_order(self):
-        rk = RungeKutta(self.method)
+        rk = Integrator(self.method)
         ks = [0,1,7]
         x0 = np.array([1.,1.,1])/np.sqrt(3)
         sols = []
