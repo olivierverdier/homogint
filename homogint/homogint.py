@@ -3,16 +3,15 @@ from typing import Callable
 from numpy.typing import NDArray
 
 from .skeletons import Skeleton
+from .geodesics import Geodesic
 
-from .actions import left_multiplication
-from .movement import exponential
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 @dataclass
 class Integrator:
     method: Skeleton
-    movement: Callable=exponential
+    geodesic: Geodesic = field(default_factory=Geodesic)
 
     def __post_init__(self):
         self.nb_stages = len(self.method.edges) + 1
@@ -23,14 +22,14 @@ class Integrator:
         """
         return np.array([movement_field(stage) for stage in stages])
 
-    def get_iterate(self, movement_field: Callable, action: Callable) -> Callable:
+    def get_iterate(self, movement_field: Callable) -> Callable:
         def evol(stages):
             new_stages = stages.copy()
             for (i,j, transition) in self.method.edges:
                 # inefficient as a) only some vectors are needed b) recomputed for each edge
                 vects = self.compute_vectors(movement_field, new_stages)
                 # the order of the edges matters; the goal is that explicit method need only one iteration
-                new_stages[i] = action(self.movement(transition(vects)), new_stages[j])
+                new_stages[i] = self.geodesic(new_stages[j], transition(vects))
             return new_stages
         return evol
 
@@ -48,10 +47,8 @@ class Integrator:
             raise Exception("No convergence after {} steps".format(i))
         return z, i
 
-    def step(self, movement_field: Callable, x0: np.ndarray, action: Callable | None=None) -> np.ndarray:
-        if action is None:
-            action = left_multiplication
-        iterate = self.get_iterate(movement_field, action)
+    def step(self, movement_field: Callable, x0: np.ndarray) -> np.ndarray:
+        iterate = self.get_iterate(movement_field)
         z0 = np.array([x0]*self.nb_stages)  # initial guess
         z, i = self.fix(iterate, z0)
         return z[-1]

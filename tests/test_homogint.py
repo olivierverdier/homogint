@@ -6,6 +6,7 @@ import numpy as np
 from homogint import Integrator, time_step
 import homogint.skeletons as sk
 from homogint.actions import trans_adjoint
+from homogint.geodesics import Geodesic
 
 import numpy.linalg as nl
 
@@ -34,12 +35,14 @@ def iso_field(P):
     sk = np.tril(P) - np.triu(P)  # skew symmetric
     return sk
 
-def solve(vf,xs,stopping,action=None, maxit=10000,solver=Integrator(sk.RKMK4())):
+def solve(vf,xs,stopping,action=None, maxit=10000,solver=None):
     "Simple solver with stopping condition. The list xs is modified **in place**."
+    if solver is None:
+        solver = Integrator(sk.RKMK4(), Geodesic(action))
     for i in range(maxit):
         if stopping(i,xs[-1]):
             break
-        xs.append(solver.step(vf, xs[-1], action=action))
+        xs.append(solver.step(vf, xs[-1]))
 
 class TestSphere(unittest.TestCase):
     def test_main(self):
