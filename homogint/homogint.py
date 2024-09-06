@@ -7,13 +7,14 @@ from .skeletons import Skeleton
 from .actions import left_multiplication
 from .movement import exponential
 
-class Integrator:
+from dataclasses import dataclass
 
-    def __init__(self, method: Skeleton, movement: Callable | None=None):
-        self.method = method
-        if movement is None:
-            movement = exponential
-        self.movement = movement
+@dataclass
+class Integrator:
+    method: Skeleton
+    movement: Callable=exponential
+
+    def __post_init__(self):
         self.nb_stages = len(self.method.edges) + 1
 
     def compute_vectors(self, movement_field: Callable, stages: list) -> np.ndarray:
