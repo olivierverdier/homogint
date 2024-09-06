@@ -1,3 +1,2 @@
 numpy
--e git+https://github.com/olivierverdier/padexp#egg=padexp
-
+scipy

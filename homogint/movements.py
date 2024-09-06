@@ -1,4 +1,4 @@
-from padexp import Exponential # type: ignore
+from padexp import Exponential  # type: ignore
 
 Exp = Exponential(order=16)
 
