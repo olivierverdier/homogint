@@ -1,10 +1,10 @@
 import numpy as np
 from typing import Callable
 
+from abc import ABC, abstractmethod
+
 def commutator(x1,x2):
     return np.dot(x1,x2) - np.dot(x2,x1)
-
-from abc import ABC, abstractmethod 
 
 class Skeleton(ABC):
     @property
