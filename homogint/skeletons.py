@@ -9,7 +9,7 @@ def commutator(x1,x2):
 class Skeleton(ABC):
     @property
     @abstractmethod
-    def edges(self) -> list[tuple[int, int, Callable[[np.ndarray], np.ndarray]]]:
+    def edges(self) -> list[tuple[int, int, Callable[[np.ndarray], np.ndarray]]]:  # pragma: no cover
         pass
 
 class ForwardEuler(Skeleton):
