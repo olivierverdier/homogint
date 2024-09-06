@@ -72,10 +72,10 @@ class TestSphere(unittest.TestCase):
         """
         Convergence failure is caught with an exception.
         """
-        rk = Integrator(sk.BackwardEuler())
+        rk = Integrator(sk.BackwardEuler(), Geodesic(trans_adjoint))
         x0 = np.array([1.,1.,1])/np.sqrt(3)
-        with self.assertRaises(Exception):
-            rk.step(time_step(10.)(body_field), x0, action=trans_adjoint)
+        with self.assertRaises(np.exceptions.TooHardError):
+            rk.step(time_step(10.)(body_field), x0)
 
 
 class HarnessOrder(object):

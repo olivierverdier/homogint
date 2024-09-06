@@ -44,7 +44,7 @@ class Integrator:
                 break
             z = new_z
         else:
-            raise Exception("No convergence after {} steps".format(i))
+            raise np.exceptions.TooHardError("No convergence after {} steps".format(i))
         return z, i
 
     def step(self, movement_field: Callable, x0: np.ndarray) -> np.ndarray:
