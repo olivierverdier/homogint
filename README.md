@@ -1,7 +1,7 @@
 # Integrators on homogeneous spaces
 
 [![Build Status](https://github.com/olivierverdier/homogint/actions/workflows/python_package.yml/badge.svg?branch=main)](https://github.com/olivierverdier/homogint/actions/workflows/python_package.yml?query=branch%3Amain)
-![Python version](https://img.shields.io/badge/Python-3.9,_3.10,_3.11,_3.12-blue.svg?logo=python)
+![Python version](https://img.shields.io/badge/Python-3.9%20|%203.10%20|%203.11%20|%203.12-blue.svg?logo=python&logoColor=gold)
 [![codecov](https://codecov.io/github/olivierverdier/homogint/graph/badge.svg?token=Ea4XsTXw6A)](https://codecov.io/github/olivierverdier/homogint)
 [![arXiv](https://img.shields.io/badge/arXiv-1402.6981-b31b1b.svg?logo=arxiv&logoColor=red)](https://arxiv.org/abs/1402.6981)
 
