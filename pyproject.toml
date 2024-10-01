@@ -2,7 +2,7 @@
 name = "homogint"
 version = "0.1.0"
 description = "Integration on homogeneous spaces"
-authors = ["Olivier Verdier <olivier.verdier@gmail.com>"]
+authors = [{name = "Olivier Verdier", email="olivier.verdier@gmail.com"}]
 license = {file = "LICENSE.md"}
 readme = "README.md"
 dependencies = [
