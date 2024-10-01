@@ -1,6 +1,6 @@
 [project]
 name = "homogint"
-version = "0.1.0"
+version = "0.1.1"
 description = "Integration on homogeneous spaces"
 authors = [{name = "Olivier Verdier", email="olivier.verdier@gmail.com"}]
 license = {file = "LICENSE.md"}
