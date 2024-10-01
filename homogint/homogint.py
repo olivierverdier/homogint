@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Callable
+from typing import Callable, TypeAlias
 from numpy.typing import NDArray
 
 from .skeletons import Skeleton
@@ -8,22 +8,26 @@ from .geodesics import Geodesic
 
 from dataclasses import dataclass, field
 
+Vector: TypeAlias = NDArray[np.float64]
+Matrix: TypeAlias = NDArray[np.float64]
+
+
 @dataclass
 class Integrator:
     method: Skeleton
     geodesic: Geodesic = field(default_factory=Geodesic)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.nb_stages = len(self.method.edges) + 1
 
-    def compute_vectors(self, movement_field: Callable, stages: list) -> np.ndarray:
+    def compute_vectors(self, movement_field: Callable[[Vector], Vector], stages: Matrix) -> Matrix:
         """
         Compute the Lie algebra elements for the stages.
         """
         return np.array([movement_field(stage) for stage in stages])
 
-    def get_iterate(self, movement_field: Callable) -> Callable:
-        def evol(stages):
+    def get_iterate(self, movement_field: Callable[[Vector], Vector]) -> Callable[[Vector], Vector]:
+        def evol(stages: Vector) -> Vector:
             new_stages = stages.copy()
             for (i,j, transition) in self.method.edges:
                 # inefficient as a) only some vectors are needed b) recomputed for each edge
@@ -34,7 +38,7 @@ class Integrator:
         return evol
 
     @classmethod
-    def fix(self, iterate: Callable[[np.ndarray], np.ndarray], z: NDArray) -> tuple[NDArray, int]:
+    def fix(self, iterate: Callable[[Vector], Vector], z: Vector) -> tuple[Vector, int]:
         """
         Find a fixed point to the iterating function `iterate`.
         """
@@ -47,10 +51,10 @@ class Integrator:
             raise np.exceptions.TooHardError("No convergence after {} steps".format(i))
         return z, i
 
-    def step(self, movement_field: Callable, x0: np.ndarray) -> np.ndarray:
+    def step(self, movement_field: Callable[[Vector], Vector], x0: Vector) -> Vector:
         iterate = self.get_iterate(movement_field)
         z0 = np.array([x0]*self.nb_stages)  # initial guess
         z, i = self.fix(iterate, z0)
-        return z[-1]
+        return np.asarray(z[-1])
 
 RungeKutta = Integrator

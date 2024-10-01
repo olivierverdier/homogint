@@ -1,15 +1,19 @@
 from dataclasses import dataclass
-from typing import Callable
+from numpy.typing import NDArray
+from typing import Callable, TypeAlias
 
-import scipy.linalg
+import numpy as np
+import scipy.linalg  # type: ignore
 
 from .actions import left_multiplication
+
+Vector: TypeAlias = NDArray[np.float64]
 
 
 @dataclass
 class Geodesic:
-    action: Callable = left_multiplication
-    movement: Callable = scipy.linalg.expm
+    action: Callable[[Vector, Vector], Vector] = left_multiplication
+    movement: Callable[[Vector], Vector] = scipy.linalg.expm
 
-    def __call__(self, x, ξ):
+    def __call__(self, x: Vector, ξ: Vector) -> Vector:
         return self.action(self.movement(ξ), x)
