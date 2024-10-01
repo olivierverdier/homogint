@@ -1,5 +1,6 @@
 import numpy as np
-from typing import Callable, TypeAlias
+from typing import Callable
+from typing_extensions import TypeAlias
 from numpy.typing import NDArray
 
 from .skeletons import Skeleton

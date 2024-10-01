@@ -1,4 +1,4 @@
-from typing import TypeAlias
+from typing_extensions import TypeAlias
 from numpy.typing import NDArray
 import numpy as np
 

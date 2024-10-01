@@ -1,4 +1,5 @@
-from typing import Callable, TypeAlias
+from typing import Callable
+from typing_extensions import TypeAlias
 from numpy.typing import NDArray
 from abc import ABC, abstractmethod
 

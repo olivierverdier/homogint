@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from numpy.typing import NDArray
-from typing import Callable, TypeAlias
+from typing import Callable
+from typing_extensions import TypeAlias
 
 import numpy as np
 import scipy.linalg  # type: ignore
