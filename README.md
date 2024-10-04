@@ -7,22 +7,23 @@
 
 This is a proof-of-concept implementation of the general description of Runge–Kutta on homogeneous spaces, from the paper ["Integrators on homogeneous spaces: Isotropy choice and connections"](http://arxiv.org/abs/1402.6981).
 
-Click on the following pictures to get an explanation [in the corresponding Notebook](https://nbviewer.org/github/olivierverdier/homogint/blob/main/examples/Demo.ipynb).
+The following pictures are extracted from [this Demo Notebook](https://gist.github.com/olivierverdier/ea449d66f856481fd80ab5aa76bb08c0)
 
 Integration on a Stiefel manifold:
 
-<a href="http://nbviewer.org/github/olivierverdier/homogint/blob/main/examples/Demo.ipynb#Stiefel-manifold:-Oja-Flow"><img alt="oja" src="https://raw.githubusercontent.com/olivierverdier/homogint/main/img/oja.png" width="200px"/></a>
+<img src="img/oja.png" alt="oja" width="200" />
 
 Quadrature on a sphere:
 
-<a href="http://nbviewer.org/github/olivierverdier/homogint/blob/main/examples/Demo.ipynb#Sphere:-quadrature"><img alt="quad" src="https://raw.githubusercontent.com/olivierverdier/homogint/main/img/quad.png" width="200px"/></a>
+<img src="img/quad.png" alt="quad" width="200" />
 
 Quadrature on the group SO(3):
 
-<a href="http://nbviewer.org/github/olivierverdier/homogint/blob/main/examples/Demo.ipynb#$\mathsf{SO}%283%29$:-Quadrature"><img alt="so3quda" src="https://raw.githubusercontent.com/olivierverdier/homogint/main/img/so3quad.png" width="200px"/></a>
+<img src="img/so3quad.png" alt="so3quad" width="200" />
+
 
 Continuous QR flow, converging towards a diagonal matrix:
 
-[![matinit](https://raw.githubusercontent.com/olivierverdier/homogint/main/img/matinit.png) ![matfinal](https://raw.githubusercontent.com/olivierverdier/homogint/main/img/matfinal.png)](http://nbviewer.org/github/olivierverdier/homogint/blob/main/examples/Demo.ipynb#Isospectral-Manifold:-Toda-flow)
+![matinit](img/matinit.png) ![matfinal](img/matfinal.png)
 
 
