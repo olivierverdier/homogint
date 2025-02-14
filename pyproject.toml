@@ -1,24 +1,18 @@
 [project]
 name = "homogint"
 version = "0.1.1"
+requires-python = ">=3.9"
 description = "Integration on homogeneous spaces"
 authors = [{name = "Olivier Verdier", email="olivier.verdier@gmail.com"}]
 license = {file = "LICENSE.md"}
 readme = "README.md"
 dependencies = [
-"numpy",
-"scipy",
-"typing_extensions",
+    "numpy",
+    "scipy",
+    "typing_extensions",
 ]
 
-[build-system]
-requires = ["setuptools >= 61.0"]
-build-backend = "setuptools.build_meta"
-
-[tool.pytest.ini_options]
-pythonpath = [
-  "."
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
 ]
-
-[tool.setuptools]
-packages = ["homogint"]
