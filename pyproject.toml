@@ -22,3 +22,7 @@ example = [
     "pickleshare>=0.7.5",
     "tqdm>=4.67.1",
 ]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"

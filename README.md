@@ -12,10 +12,9 @@ This is a proof-of-concept implementation of the general description of Runge–
 
 ## Installation & Examples
 
-1. Install [`uv`](https://docs.astral.sh/uv/) if you haven't already.
 2. Clone this repo
-3. Inside the repo, run `uv sync`
-4. Run `uv run --group example --with jupyter,"." jupyter lab`
+1. Install [`uv`](https://docs.astral.sh/uv/) if you haven't already.
+4. Run `uv run --group example jupyter lab`
 5. Open the jupyter URL in a browser
 6. Navigate to the `examples` folder and run the `Demo.ipynb`.
 
