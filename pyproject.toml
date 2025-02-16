@@ -16,3 +16,9 @@ dependencies = [
 dev = [
     "pytest>=8.3.4",
 ]
+example = [
+    "jupyter>=1.1.1",
+    "matplotlib>=3.9.4",
+    "pickleshare>=0.7.5",
+    "tqdm>=4.67.1",
+]
