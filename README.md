@@ -5,9 +5,23 @@
 [![codecov](https://codecov.io/github/olivierverdier/homogint/graph/badge.svg?token=Ea4XsTXw6A)](https://codecov.io/github/olivierverdier/homogint)
 [![arXiv](https://img.shields.io/badge/arXiv-1402.6981-b31b1b.svg?logo=arxiv&logoColor=red)](https://arxiv.org/abs/1402.6981)
 
+## Purpose
+
+
 This is a proof-of-concept implementation of the general description of Runge–Kutta on homogeneous spaces, from the paper ["Integrators on homogeneous spaces: Isotropy choice and connections"](http://arxiv.org/abs/1402.6981).
 
+## Installation & Examples
+
+1. Install [`uv`](https://docs.astral.sh/uv/) if you haven't already.
+2. Clone this repo
+3. Inside the repo, run `uv sync`
+4. Run `uv run --group example --with jupyter,"." jupyter lab`
+5. Open the jupyter URL in a browser
+6. Navigate to the `examples` folder and run the `Demo.ipynb`.
+
+## Gallery
 The following pictures are extracted from [this Demo Notebook](https://gist.github.com/olivierverdier/ea449d66f856481fd80ab5aa76bb08c0)
+
 
 Integration on a Stiefel manifold:
 
